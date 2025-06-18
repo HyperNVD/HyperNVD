@@ -21,6 +21,7 @@ if __name__ == '__main__':
     
     for sequence_name in lst:
         files = sorted((data_path / sequence_name).glob('*.jpg'))
+        Path(f'{path2DAVIS}/trainval-480p/DAVIS/flow/').mkdir(parents=True, exist_ok=True)
         out_flow_dir = Path(f'{path2DAVIS}/trainval-480p/DAVIS/flow/' + sequence_name)
         out_flow_dir.mkdir(exist_ok=True)
         raft_wrapper = RAFTWrapper(

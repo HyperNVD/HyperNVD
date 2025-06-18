@@ -1,25 +1,17 @@
 import torch
 import os
+import argparse
+import sys
+import copy
 
 from transformers import VideoMAEImageProcessor, VideoMAEForVideoClassification
 
 
-from pytorchvideo.transforms import (
-    ApplyTransformToKey,
-    Normalize,
-)
-
-from torchvision.transforms import (
-    Compose,
-    Lambda,
-    Resize,
-)
-import os
-import torch
-import sys
-
+from pytorchvideo.transforms import ApplyTransformToKey, Normalize
 from pytorchvideo.data.encoded_video import EncodedVideo
-import copy
+
+from torchvision.transforms import Compose, Lambda, Resize
+
 
 model_ckpt = "MCG-NJU/videomae-base" # pre-trained model from which to fine-tune
 
@@ -30,7 +22,7 @@ class DecoderMAE(torch.nn.Module):
                         model_ckpt,
                         ignore_mismatched_sizes=True,
                         num_labels=768,
-                        output_hidden=True,
+                        output_hidden_states=True,
                         return_dict=True,
                     )
         self.decoder = torch.nn.Linear(768, 1568*768)
@@ -45,7 +37,8 @@ class DecoderMAE(torch.nn.Module):
 
 
 class DatasetVideoMae(torch.utils.data.Dataset):
-    def __init__(self, root_path):        
+    def __init__(self, root_path): 
+        self.root_path = root_path
         model_ckpt = "MCG-NJU/videomae-base" # pre-trained model from which to fine-tune
         image_processor = VideoMAEImageProcessor.from_pretrained(model_ckpt)
         
@@ -111,9 +104,11 @@ class DatasetVideoMae(torch.utils.data.Dataset):
 
 
 if __name__ == "__main__":
-    path2DAVIS = sys.argv[1]
+    parser = argparse.ArgumentParser(description='Preprocess image sequence')
+    parser.add_argument('--path2DAVIS', type=str, help='Path to DAVIS dataset')
+    args = parser.parse_args()
     path2VideoMAE_ckpt = os.path.join("checkpoints", "VideoMAE.pth")
-    dataset = DatasetVideoMae(root_path=os.path.join(path2DAVIS, "MP4", "class0"))
+    dataset = DatasetVideoMae(root_path=os.path.join(args.path2DAVIS, "MP4"))
     dataloader = torch.utils.data.DataLoader(dataset, batch_size=2, shuffle=False, num_workers=1)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -122,7 +117,7 @@ if __name__ == "__main__":
     model.eval()
     model = model.to(device)
 
-    os.makedirs(os.path.join(path2DAVIS, "EMBEDDINGS"), exist_ok=True)
+    os.makedirs(os.path.join(args.path2DAVIS, "EMBEDDINGS"), exist_ok=True)
     with torch.no_grad():
         for i, inputs in enumerate(dataloader):
             name, video, start = inputs["name"], inputs["video"], inputs["start"]
@@ -131,4 +126,4 @@ if __name__ == "__main__":
             outputs = model.videoMAE(video).logits
 
             for i, n in enumerate(name):
-                torch.save(outputs[i], os.path.join(path2DAVIS, "EMBEDDINGS", f"{name[i]}_{start[i]}.pt"))
+                torch.save(outputs[i], os.path.join(args.path2DAVIS, "EMBEDDINGS", f"{name[i]}_{start[i]}.pt"))

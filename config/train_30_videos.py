@@ -16,7 +16,7 @@ folder_suffix = '30_videos_MAE'
 use_maskrcnn = True
 seperate_obj_gtmask = False
 learning_rate = 0.0001
-seed=42
+seed = 42
 
 logger = dict(                              
     period = 500,
