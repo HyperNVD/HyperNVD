@@ -2,11 +2,12 @@
 
 ### [Project Page](https://hypernvd.github.io/) | [Paper](https://arxiv.org/abs/2503.17276)
 
+
+## Overview
+
 This repository contains the implementation for the CVPR2025 paper HyperNVD: Accelerating Neural Video Decomposition via Hypernetworks.
 
 The paper introduces a meta-learning strategy by hypernetwork for layer-based video decomposition, which enables fast and consistent editing on unseen videos.
-
-## Overview
 
 <img src="HyperNVD.png" alt="drawing"/>
 
