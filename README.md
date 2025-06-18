@@ -2,8 +2,6 @@
 
 ### [Project Page](https://hypernvd.github.io/) | [Paper](https://arxiv.org/abs/2503.17276)
 
-https://github.com/vllab/hashing-nvd/assets/13299616/432e4ca4-022e-4e46-bab3-423a50c667da
-
 ## Installation
 
 Our code is compatible and validate with Python 3.9.16, PyTorch 1.13.1, and CUDA 11.7.
