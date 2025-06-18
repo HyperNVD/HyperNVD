@@ -1,0 +1,4 @@
+*.pyc
+*.pth
+network/gridencoder/build/*
+results/*
