@@ -20,27 +20,27 @@ pip install opencv-python imageio-ffmpeg gdown
 pip install easydict
 ```
 
+We use MaskRCNN for coarse mask extraction.
 ```
-# use MaskRCNN for coarse mask extraction
 python -m pip install detectron2 -f https://dl.fbaipublicfiles.com/detectron2/wheels/cu113/torch1.10/index.html
 ```
 
+We use tinycudann for positional encoding, refer to [tinycudann](https://github.com/NVlabs/tiny-cuda-nn) for detailed instructions.
 ```
-# use tinycudann for positional encoding, refer to https://github.com/NVlabs/tiny-cuda-nn for detailed instructions
 $ git clone --recursive https://github.com/nvlabs/tiny-cuda-nn
 $ cd tiny-cuda-nn
 tiny-cuda-nn$ cmake . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo
 tiny-cuda-nn$ cmake --build build --config RelWithDebInfo -j
 ```
 
+For VideoMAE embedding:
 ```
-# use MaskRCNN for coarse mask extraction
 pip install transformers==4.33
 pip install pytorchvideo
 ```
 
+If desired you can also download wandb for logging:
 ```
-# if desired you can also download wandb for logging
 pip install wandb
 ```
 
