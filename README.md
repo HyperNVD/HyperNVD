@@ -2,6 +2,9 @@
 
 ### [Project Page](https://hypernvd.github.io/) | [Paper](https://arxiv.org/abs/2503.17276)
 
+This repository contains the implementation for the CVPR2025 paper HyperNVD: Accelerating Neural Video Decomposition via Hypernetworks.
+
+The paper introduces a meta-learning strategy by hypernetwork for layer-based video decomposition, which enables fast and consistent editing on unseen videos.
 
 ## Overview
 
@@ -70,6 +73,7 @@ python prepare_dataset/preprocess_optical_flow.py --path2DAVIS <path_to_DAVIS> -
 ```
 
 The script will automatically generate the corresponding backward and forward optical flow and store the npy files in the right directory.
+
 
 
 ### Preprocess MAE embeddings
