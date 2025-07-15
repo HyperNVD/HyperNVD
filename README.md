@@ -85,7 +85,7 @@ We extract the embeddings of the DAVIS dataset with the following command:
 python prepare_dataset/create_videos_DAVIS.py --path2DAVIS <path_to_DAVIS>
 python prepare_dataset/EmbedAllVideoMAE.py --path2DAVIS <path_to_DAVIS>
 ```
-This scripts will automatically generate the .mp4 and embeddings of the davis dataset and store them in path2DAVIS/MP4 and path2DAVIS/EMBEDDIGNS respectively. Please download the checkpoint of VideoMAE encoder from [here](https://cvcuab-my.sharepoint.com/:f:/g/personal/dxue_cvc_uab_cat/EmwmLJKcnNRNtCOMqn1qEVcBLaq78D6OeEh_QinjTxZoKQ?e=koZy6X).
+This scripts will automatically generate the .mp4 and embeddings of the davis dataset and store them in path2DAVIS/MP4 and path2DAVIS/EMBEDDIGNS respectively. Please download the checkpoint of VideoMAE encoder from [here](https://drive.google.com/file/d/1yP1gAtvrG_hKUBEhSH-cDH4O1NThaQSA/view?usp=sharing).
 
 ## Train hypernet with multiple videos
 
